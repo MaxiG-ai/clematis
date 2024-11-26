@@ -27,14 +27,18 @@ class DynamicManufacturing:
 
 	def iterate(self, output, write2file=False):
 		# output is a file to output data from the simulation
-
+		
+  		# started iterating
+		print("\nStarted iterating\n")
+  
 		# initialize production
 		total_production = 0
 
 		# write the header to the file
 		if self.time == 0:
-			#output.write("time,vertex,state,state_id,buffer_occupation,production_step\n")
-			output.write("time,starved,blocked,working\n")
+			with open(output, "w") as output_file: 
+       			#output.write("time,vertex,state,state_id,buffer_occupation,production_step\n")
+				output_file.write("time,starved,blocked,working\n")
 
 		# increase time
 		self.time = self.time + 1
@@ -135,9 +139,13 @@ class DynamicManufacturing:
 
 		# write status to file
 		if write2file:
-			output.write("{},{},{},{}\n".format(self.time, zero_count, one_count, two_count))
+			with open(output, "a") as output_file:
+				# write the time and the state of each node
+				output_file.write("{},{},{},{}\n".format(self.time, zero_count, one_count, two_count))
 			#output.write("{},{},{},{},{},{}\n".format(self.time, ids[i], self.state[i], self.state_id[i], self.buffer_occupation[i], production_step[i]))
 
+  
+		print("{},{},{},{}\n".format(self.time, zero_count, one_count, two_count))
 		# check how many nodes changed their ID
 		#zero_count = self.state_id.tolist().count(0)
 		#one_count = self.state_id.tolist().count(1)
