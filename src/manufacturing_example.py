@@ -8,5 +8,5 @@ work_stations, production_edges, vertex_attr = production_model.generate_graph()
 print(work_stations)
 
 manufacturing_sim = DynamicManufacturing(Graph(production_edges, directed=True, vertex_attrs=vertex_attr), seed=42)
-
-total_production, zero_count, one_count, two_count, state_array = manufacturing_sim.iterate(output="output.csv", write2file=True)
+for _ in range(10):
+	total_production, zero_count, one_count, two_count, state_array = manufacturing_sim.iterate(output="output.csv", write2file=True)
